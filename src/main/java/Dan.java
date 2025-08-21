@@ -33,13 +33,13 @@ public class Dan {
             } else if (input.matches(markRegex)){
                 String[] temp = input.split(" ");
                 int index = Integer.parseInt(temp[1]);
-//                try {
+                try {
                     Task task =  taskList.get(index - 1);
                     task.markDone();
                     System.out.println("Nice! I've marked this task as done: \n " + task);
-//                } catch(IndexOutOfBoundsException e) {
-
-//                }
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println("That task does not exist.");
+                }
             } else if (input.matches(toDoRegex)){
                 String desc = input.replaceFirst("todo", "");
 //                String[] temp = input.split("todo", 1);
@@ -83,12 +83,20 @@ public class Dan {
                 taskList.add(d);
                 System.out.println("Got it. I've added this task: \n " + d + "\nNow you have " + taskList.size() + " tasks in the list.");
             } else {
-                System.out.println("Unrecognised input");
+                try {
+                    unrecognisedInput();
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e);
+                }
             }
             System.out.println(divider);
         }
 
         System.out.println("Bye. Hope to see you again soon!\n");
         System.out.println(divider);
+    }
+
+    public static void unrecognisedInput() throws IllegalArgumentException {
+        throw new IllegalArgumentException("I do not recognise this input.");
     }
 }
