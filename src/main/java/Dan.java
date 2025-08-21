@@ -13,6 +13,8 @@ public class Dan {
         while(!input.equals( "bye")) {
             input = scanner.nextLine();
             System.out.println(divider);
+            System.out.println(input);
+            System.out.println(divider);
         }
 
         System.out.println("Bye. Hope to see you again soon!\n");
