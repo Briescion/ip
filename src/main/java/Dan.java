@@ -8,6 +8,7 @@ public class Dan {
         Scanner scanner = new Scanner(System.in);
 
         String markRegex =  "^mark (-?\\d+)$";
+        String deleteRegex =  "^delete (-?\\d+)$";
         String toDoRegex = "^todo (.+)$";
         String deadlineRegex = "^deadline (.+) /by (.+)$";
         String eventRegex = "^event (.+) /from (.+) /to (.+)$";
@@ -40,6 +41,17 @@ public class Dan {
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("That task does not exist.");
                 }
+            } else if (input.matches(deleteRegex)) {
+                String indexStr = input.replaceFirst("delete ", "");
+                int index = Integer.parseInt(indexStr);
+                try {
+                    Task task =  taskList.get(index - 1);
+                    taskList.remove(index - 1);
+                    System.out.println("Noted. I've removed this task: \n " + task + "\nNow you have " + taskList.size() + " tasks in the list.");
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println("That task does not exist.");
+                }
+
             } else if (input.matches(toDoRegex)){
                 String desc = input.replaceFirst("todo", "");
 //                String[] temp = input.split("todo", 1);
