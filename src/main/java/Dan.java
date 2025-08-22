@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class Dan {
     public static void main(String[] args) {
@@ -54,12 +52,6 @@ public class Dan {
 
             } else if (input.matches(toDoRegex)){
                 String desc = input.replaceFirst("todo", "");
-//                String[] temp = input.split("todo", 1);
-//                if (temp.length != 1) {
-//                    continue;
-//                }
-//
-//                String desc = temp[0];
                 ToDo t = new ToDo(desc);
                 taskList.add(t);
                 System.out.println("Got it. I've added this task: \n " + t + "\nNow you have " + taskList.size() + " tasks in the list.");
@@ -94,12 +86,14 @@ public class Dan {
                 Deadline d = new Deadline(desc, by);
                 taskList.add(d);
                 System.out.println("Got it. I've added this task: \n " + d + "\nNow you have " + taskList.size() + " tasks in the list.");
+            } else if (input.equals("bye")) {
+                break;
             } else {
-                try {
-                    unrecognisedInput();
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e);
-                }
+                    try {
+                        unrecognisedInput();
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e);
+                    }
             }
             System.out.println(divider);
         }
