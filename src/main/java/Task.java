@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String description;
     private Boolean isDone = false;
 
@@ -17,6 +17,12 @@ public class Task {
     public void markDone() {
         this.isDone = true;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public abstract TaskType getTaskType();
 
 //    public void markUndone() {
 //       this.isDone = false;
