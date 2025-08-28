@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     public void delete(int index) {
-        taskList.remove(index);
+        taskList.remove(index - 1);
         store.writeData(taskList);
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
 //    }
 
     public Task getTask(int index) {
-        return taskList.get(index);
+        return taskList.get(index - 1);
     }
 
     public int size() {
