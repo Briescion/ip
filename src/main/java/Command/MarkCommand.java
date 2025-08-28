@@ -1,6 +1,8 @@
 package Command;
 
 import Task.TaskList;
+import Task.Task;
+import Ui.Ui;
 
 public class MarkCommand extends Command {
     int index;
@@ -13,7 +15,10 @@ public class MarkCommand extends Command {
         return CommandType.MARK;
     }
 
-    public void execute(TaskList taskList) {
+    public boolean execute(TaskList taskList, Ui ui) {
         taskList.markDone(index);
+        Task task = taskList.getTask(index - 1);
+        ui.mark(task, taskList.size());
+        return true;
     }
 }

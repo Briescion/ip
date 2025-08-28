@@ -13,53 +13,42 @@ import java.util.List;
 import Parser.Parser;
 
 public class Storage {
-    public static Storage shared = new Storage();
-    public ArrayList<Task> taskList = new ArrayList<>();
+    private Path filePath;
+//    private final Path filePath =  Paths.get( "Data/Dan.txt");
+//    private final Path dirPath = Paths.get("Data");
 
-    private final Path filePath =  Paths.get( "Data/Dan.txt");
-    private final Path dirPath = Paths.get("Data");
+    public Storage(Path filePath) {
+        this.filePath = filePath;
+    }
 
-    public Storage() {
-        File data = filePath.toFile();
-        File dir = dirPath.toFile();
-
-        if (!dir.isDirectory()) {
-            try {
-                Files.createDirectory(dirPath);
-            } catch(IOException e) {
-                System.out.println("Could not create directory");
-            }
-        }
-
-        if (!data.isFile()) {
-            try {
-                Files.createFile(filePath);
-            } catch(IOException e) {
-                System.out.println("Could not create file");
-            }
-        }
-
+    public boolean createDirectoriesAndFile() {
         try {
-            List<String> dataStringList = Files.readAllLines(filePath);
-            this.taskList = Parser.parseDataStringListToTasks(dataStringList);
-            System.out.println("Initialised data");
-        } catch(IOException e) {
-            System.out.println("Could not access file");
+            Path parentDir = this.filePath.getParent();
+
+            // Create parent directories if needed
+            if (parentDir != null && !Files.exists(parentDir)) {
+                Files.createDirectories(parentDir);
+            }
+
+            if (!Files.exists(this.filePath)) {
+                Files.createFile(this.filePath);
+            }
+
+            return true;
+        } catch (IOException e) {
+            return false;
         }
     }
 
-    public ArrayList<String> getStringData() {
-        ArrayList<String> dataArr = new ArrayList<>();
-         try {
-             List<String> lines = Files.readAllLines(filePath);
-             ArrayList<String> linesArr = new ArrayList<>(lines);
-             return linesArr;
-         } catch (IOException e) {
-             return dataArr;
-         }
+    public Storage load() {
+        if (createDirectoriesAndFile()) {
+            return this;
+         } else {
+            return null;
+        }
     }
 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTaskList() {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {

@@ -22,6 +22,7 @@ public class Event extends Task {
 
         String isDone = taskInfo.get(0);
         String description = taskInfo.get(1);
+
         LocalDate fromDate = DateParser.parseDate(taskInfo.get(2));
         LocalDate toDate = DateParser.parseDate(taskInfo.get(3));
 

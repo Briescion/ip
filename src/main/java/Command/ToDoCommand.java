@@ -3,6 +3,8 @@ package Command;
 import Task.TaskList;
 import Task.Task;
 
+import Ui.Ui;
+
 public class ToDoCommand extends Command {
     Task toDo;
 
@@ -14,8 +16,9 @@ public class ToDoCommand extends Command {
         return CommandType.TODO;
     }
 
-    public void execute(TaskList taskList) {
+    public boolean execute(TaskList taskList, Ui ui) {
         taskList.add(toDo);
-        System.out.println("Got it. I've added this task: \n " + toDo + "\nNow you have " + taskList.size() + " tasks in the list.");
+        ui.makeTask(toDo, taskList.size());
+        return true;
     }
 }

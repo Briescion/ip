@@ -36,7 +36,7 @@ public class Parser {
         return tasks;
     }
 
-    private static String parseTaskToDataString(Task task) {
+    public static String parseTaskToDataString(Task task) {
         String data = "";
 
         switch (task.getTaskType()) {
@@ -129,7 +129,9 @@ public class Parser {
             String[] taskInfo = {"D", "false", desc, by};
             Task deadline = Task.createTask(taskInfo);
             return new DeadlineCommand(deadline);
-        }  else {
+        } else if (str.equals("bye")) {
+            return new ExitCommand();
+        } else {
             throw new IllegalArgumentException();
         }
     }

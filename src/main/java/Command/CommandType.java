@@ -7,5 +7,5 @@ public enum CommandType {
     TODO,
     EVENT,
     DEADLINE,
-    NONE
+    EXIT
 }

@@ -4,20 +4,22 @@ import Storage.Storage;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> taskList = Storage.shared.taskList;
+    Storage store;
+    ArrayList<Task> taskList = new ArrayList<>();
 
-    public TaskList() {
-        this.taskList = Storage.shared.getTasks();
+    public TaskList(Storage store) {
+        this.store = store;
+        this.taskList = store.getTaskList();
     }
 
     public void add(Task task) {
         taskList.add(task);
-        Storage.shared.writeData(taskList);
+        store.writeData(taskList);
     }
 
     public void delete(int index) {
         taskList.remove(index);
-        Storage.shared.writeData(taskList);
+        store.writeData(taskList);
     }
 
     public void markDone(int index) {
@@ -25,15 +27,15 @@ public class TaskList {
             Task task = taskList.get(index - 1);
             task.markDone();
         } catch(IndexOutOfBoundsException e) {
-            System.out.println("No such task");
+            System.out.println("Type in a valid index");
         }
     }
 
-    public void list() {
-        for(int i = 1; i < taskList.size() + 1; i++) {
-            System.out.println(i + "." + taskList.get(i - 1));
-        }
-    }
+//    public void list() {
+//        for(int i = 1; i < taskList.size() + 1; i++) {
+//            System.out.println(i + "." + taskList.get(i - 1));
+//        }
+//    }
 
     public Task getTask(int index) {
         return taskList.get(index);

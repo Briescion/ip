@@ -1,40 +1,50 @@
 import Parser.Parser;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
+import Storage.Storage;
 import Task.TaskList;
 import Command.Command;
+import Ui.Ui;
 
 public class Dan {
-    public static void main(String[] args) {
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Dan(String filePath) {
+        Path path = Paths.get( filePath);
+        Storage storage = new Storage(path);
+        this.storage = storage;
+        this.tasks = new TaskList(storage.load());
+        this.ui = new Ui();
+    }
+
+    public void run() {
+
+        this.ui.welcome();
+
         Scanner scanner = new Scanner(System.in);
-
-        String divider = "____________________________________________________________ ";
-
-        TaskList taskList = new TaskList();
-
-        System.out.println("Hello! I'm Dan\n");
-        System.out.println("What can I do for you?\n");
-        System.out.println(divider);
-
+        Boolean shouldContinue = true;
         String input = "";
 
-        while (!input.equals( "bye")) {
+        while (shouldContinue) {
             input = scanner.nextLine();
-
-            System.out.println(divider);
 
             try {
                 Command cmd = Parser.parseUserInput(input);
-                cmd.execute(taskList);
+                shouldContinue = cmd.execute(this.tasks, ui);
             } catch (IllegalArgumentException e) {
                 continue;
             }
-
-            System.out.println(divider);
         }
+    }
 
-        System.out.println("Bye. Hope to see you again soon!\n");
-        System.out.println(divider);
+    public static void main(String[] args) {
+        new Dan("data/tasks.txt").run();
     }
 
     public static void unrecognisedInput() throws IllegalArgumentException {

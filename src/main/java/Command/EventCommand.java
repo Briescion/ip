@@ -3,6 +3,8 @@ package Command;
 import Task.TaskList;
 import Task.Task;
 
+import Ui.Ui;
+
 public class EventCommand extends Command {
     Task event;
 
@@ -14,7 +16,9 @@ public class EventCommand extends Command {
         return  CommandType.EVENT;
     }
 
-    public void execute(TaskList taskList) {
+    public boolean execute(TaskList taskList, Ui ui) {
         taskList.add(event);
+        ui.makeTask(event, taskList.size());
+        return true;
     }
 }
