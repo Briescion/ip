@@ -18,12 +18,20 @@ public class Parser {
     private static final String DEADLINE_REGEX = "^deadline (.+) /by (.+)$";
     private static final String EVENT_REGEX = "^event (.+) /from (.+) /to (.+)$";
 
+
     private static Task parseDataStringToTask(String dataString) throws IllegalArgumentException  {
         String[] dataStringComponents = dataString.split("\\|");
         String[] taskInfo = Arrays.stream(dataStringComponents).map(String::trim).toArray(String[]::new);
         return Task.createTask(taskInfo);
     }
 
+    /**
+     * Parses a list of data strings and converts them into Task objects.
+     * Each string in the list represents a task in its stored format.
+     *
+     * @param stringDataList a list of strings representing tasks in storage format
+     * @return an ArrayList of Task objects parsed from the input strings
+     */
     public static ArrayList<Task> parseDataStringListToTasks(List<String> stringDataList) {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -36,6 +44,13 @@ public class Parser {
         return tasks;
     }
 
+    /**
+     * Converts a Task object into its string representation for data storage.
+     * The format varies depending on the task type (ToDo, Deadline, or Event).
+     *
+     * @param task the Task object to be converted to a data string
+     * @return a string representation of the task suitable for storage
+     */
     public static String parseTaskToDataString(Task task) {
         String data = "";
 
@@ -66,6 +81,13 @@ public class Parser {
         return data;
     }
 
+    /**
+     * Converts a list of Task objects into a multi-line string suitable for file storage.
+     * Each task is converted to its data string format and separated by line separators.
+     *
+     * @param tasks an ArrayList of Task objects to be converted
+     * @return a multi-line string representation of all tasks for storage
+     */
     public static String parseTasksToDataString(ArrayList<Task> tasks) {
         String dataString = "";
 
@@ -77,6 +99,15 @@ public class Parser {
         return dataString;
     }
 
+    /**
+     * Parses user input string and returns the appropriate Command object.
+     * Recognizes commands like "list", "mark", "delete", "todo", "deadline", "event", and "bye".
+     * Uses regex patterns to validate and extract information from command strings.
+     *
+     * @param str the user input string to be parsed
+     * @return a Command object corresponding to the parsed user input
+     * @throws IllegalArgumentException if the input string does not match any valid command format
+     */
     public static Command parseUserInput(String str) throws IllegalArgumentException {
         if (str.equals("list")) {
             return new ListCommand();
