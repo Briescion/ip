@@ -1,0 +1,137 @@
+package Parser;
+
+import Command.ListCommand;
+import Task.Task;
+
+import Task.*;
+import Command.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.lang.IllegalArgumentException;
+
+public class Parser {
+
+    private static final String markRegex =  "^mark (-?\\d+)$";
+    private static final String deleteRegex =  "^delete (-?\\d+)$";
+    private static final String toDoRegex = "^todo (.+)$";
+    private static final String deadlineRegex = "^deadline (.+) /by (.+)$";
+    private static final String eventRegex = "^event (.+) /from (.+) /to (.+)$";
+    private static final String divider = "____________________________________________________________ ";
+
+    private static Task parseDataStringToTask(String dataString) throws IllegalArgumentException  {
+        String[] dataStringComponents = dataString.split("\\|");
+        String[] taskInfo = Arrays.stream(dataStringComponents).map(String::trim).toArray(String[]::new);
+        return Task.createTask(taskInfo);
+    }
+
+    public static ArrayList<Task> parseDataStringListToTasks(List<String> stringDataList) {
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        for(int i = 0; i < stringDataList.size(); i++) {
+            String dataString = stringDataList.get(i);
+            Task task = parseDataStringToTask(dataString);
+            tasks.add(task);
+        }
+
+        return tasks;
+    }
+
+    private static String parseTaskToDataString(Task task) {
+        String data = "";
+
+        switch (task.getTaskType()) {
+            case TODO:
+                ToDo todo = (ToDo) task;
+                data += "T | ";
+                data += todo.isDone().toString() + " | ";
+                data += todo.getDescription();
+                break;
+            case DEADLINE:
+                Deadline deadline = (Deadline) task;
+                data += "D | ";
+                data += deadline.isDone().toString() + " | ";
+                data += deadline.getDescription() + " | ";
+                data += deadline.getDeadlineDate();
+                break;
+            case EVENT:
+                Event event = (Event) task;
+                data += "E | ";
+                data += event.isDone().toString() + " | ";
+                data += event.getDescription() + " | ";
+                data += event.getFromDate() + " | ";
+                data += event.getToDate();
+                break;
+        }
+
+        return data;
+    }
+
+    public static String parseTasksToDataString(ArrayList<Task> tasks) {
+        String dataString = "";
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String taskDataString = parseTaskToDataString(tasks.get(i));
+            dataString = dataString + taskDataString + System.lineSeparator();
+        }
+
+        return dataString;
+    }
+
+    public static Command parseUserInput(String str) throws IllegalArgumentException {
+        if (str.equals("list")) {
+            return new ListCommand();
+        } else if (str.matches(markRegex)){
+            String[] temp = str.split(" ");
+            int index = Integer.parseInt(temp[1]);
+            return new MarkCommand(index);
+        } else if (str.matches(deleteRegex)) {
+            String indexStr = str.replaceFirst("delete ", "");
+            int index = Integer.parseInt(indexStr);
+            return new DeleteCommand(index);
+        } else if (str.matches(toDoRegex)){
+            String desc = str.replaceFirst("todo", "");
+            String[] taskInfo = {"T", "false", desc};
+            Task toDO = Task.createTask(taskInfo);
+            return new ToDoCommand(toDO);
+        } else if (str.matches(eventRegex)) {
+            String withoutEvent = str.replaceFirst("event", "");
+            String[] fromSplit = withoutEvent.split("/from", 2);
+
+            if (fromSplit.length != 2) {
+               throw new IllegalArgumentException();
+            }
+
+            String desc = fromSplit[0];
+            String duration = fromSplit[1];
+            String[] times = duration.split("/to", 2);
+
+            if (times.length != 2) {
+                throw new IllegalArgumentException();
+            }
+
+            String from = times[0];
+            String to = times[1];
+
+            String[] taskInfo = {"E", "false", desc, from, to};
+            Task event = Task.createTask(taskInfo);
+            return new EventCommand(event);
+        } else if (str.matches(deadlineRegex)){
+            String withoutDeadline = str.replaceFirst("deadline", "");
+            String[] bySplit = withoutDeadline.split("/by", 2);
+
+            if (bySplit.length != 2) {
+               throw new IllegalArgumentException();
+            }
+
+            String desc = bySplit[0];
+            String by = bySplit[1];
+
+            String[] taskInfo = {"D", "false", desc, by};
+            Task deadline = Task.createTask(taskInfo);
+            return new DeadlineCommand(deadline);
+        }  else {
+            throw new IllegalArgumentException();
+        }
+    }
+}

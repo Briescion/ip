@@ -1,0 +1,45 @@
+package Task;
+
+import Storage.Storage;
+import java.util.ArrayList;
+
+public class TaskList {
+    ArrayList<Task> taskList = Storage.shared.taskList;
+
+    public TaskList() {
+        this.taskList = Storage.shared.getTasks();
+    }
+
+    public void add(Task task) {
+        taskList.add(task);
+        Storage.shared.writeData(taskList);
+    }
+
+    public void delete(int index) {
+        taskList.remove(index);
+        Storage.shared.writeData(taskList);
+    }
+
+    public void markDone(int index) {
+        try {
+            Task task = taskList.get(index - 1);
+            task.markDone();
+        } catch(IndexOutOfBoundsException e) {
+            System.out.println("No such task");
+        }
+    }
+
+    public void list() {
+        for(int i = 1; i < taskList.size() + 1; i++) {
+            System.out.println(i + "." + taskList.get(i - 1));
+        }
+    }
+
+    public Task getTask(int index) {
+        return taskList.get(index);
+    }
+
+    public int size() {
+        return taskList.size();
+    }
+}
