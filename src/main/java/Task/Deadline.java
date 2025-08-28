@@ -1,12 +1,15 @@
 package Task;
 
-import java.time.LocalDateTime;
+import Parser.DateTimeParser;
+
+import java.time.LocalDate;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 
 public class Deadline extends Task {
-    private LocalDateTime deadlineDate;
+    private Temporal deadlineDate;
 
-    public Deadline(String isDone, String description, LocalDateTime  deadlineDate) {
+    public Deadline(String isDone, String description, Temporal deadlineDate) {
         super(isDone, description);
         this.deadlineDate = deadlineDate;
     }
@@ -20,12 +23,12 @@ public class Deadline extends Task {
         String description = taskInfo.get(1);
 
         String deadlineString = taskInfo.get(2);
-        LocalDateTime deadline = LocalDateTime.parse(deadlineString);
+        LocalDate deadline = DateTimeParser.parseDate(deadlineString);
 
         return new Deadline(isDone, description, deadline);
     }
 
-    public LocalDateTime getDeadlineDate() {
+    public Temporal getDeadlineDate() {
         return this.deadlineDate;
     }
 
