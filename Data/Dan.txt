@@ -1,1 +1,3 @@
-T | false |  hw
+T | false | hw
+E | false | recruitment fair | 2025-08-28 | 2025-08-30
+D | false | assignment | 2025-08-28

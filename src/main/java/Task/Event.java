@@ -1,13 +1,18 @@
 package Task;
 
+import Parser.DateTimeParser;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Event extends Task {
-    LocalDateTime fromDate;
-    LocalDateTime toDate;
+    LocalDate fromDate;
+    LocalDate toDate;
 
-    public Event(String isDone, String description, LocalDateTime from, LocalDateTime to) {
+    public Event(String isDone, String description, LocalDate from, LocalDate to) {
         super(isDone, description);
         this.fromDate = from;
         this.toDate = to;
@@ -20,17 +25,17 @@ public class Event extends Task {
 
         String isDone = taskInfo.get(0);
         String description = taskInfo.get(1);
-        LocalDateTime fromDate = LocalDateTime.parse(taskInfo.get(2));
-        LocalDateTime toDate = LocalDateTime.parse(taskInfo.get(3));
+        LocalDate fromDate = DateTimeParser.parseDate(taskInfo.get(2));
+        LocalDate toDate = DateTimeParser.parseDate(taskInfo.get(3));
 
         return new Event(isDone, description, fromDate, toDate);
     }
 
-    public LocalDateTime getFromDate() {
+    public LocalDate getFromDate() {
         return this.fromDate;
     }
 
-    public LocalDateTime getToDate() {
+    public LocalDate getToDate() {
         return this.toDate;
     }
 

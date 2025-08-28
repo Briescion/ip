@@ -12,12 +12,11 @@ import java.lang.IllegalArgumentException;
 
 public class Parser {
 
-    private static final String markRegex =  "^mark (-?\\d+)$";
-    private static final String deleteRegex =  "^delete (-?\\d+)$";
-    private static final String toDoRegex = "^todo (.+)$";
-    private static final String deadlineRegex = "^deadline (.+) /by (.+)$";
-    private static final String eventRegex = "^event (.+) /from (.+) /to (.+)$";
-    private static final String divider = "____________________________________________________________ ";
+    private static final String MARK_REGEX =  "^mark (-?\\d+)$";
+    private static final String DELETE_REGEX =  "^delete (-?\\d+)$";
+    private static final String TODO_REGEX = "^todo (.+)$";
+    private static final String DEADLINE_REGEX = "^deadline (.+) /by (.+)$";
+    private static final String EVENT_REGEX = "^event (.+) /from (.+) /to (.+)$";
 
     private static Task parseDataStringToTask(String dataString) throws IllegalArgumentException  {
         String[] dataStringComponents = dataString.split("\\|");
@@ -45,20 +44,20 @@ public class Parser {
                 ToDo todo = (ToDo) task;
                 data += "T | ";
                 data += todo.isDone().toString() + " | ";
-                data += todo.getDescription();
+                data += todo.getDescription().trim();
                 break;
             case DEADLINE:
                 Deadline deadline = (Deadline) task;
                 data += "D | ";
                 data += deadline.isDone().toString() + " | ";
-                data += deadline.getDescription() + " | ";
+                data += deadline.getDescription().trim() + " | ";
                 data += deadline.getDeadlineDate();
                 break;
             case EVENT:
                 Event event = (Event) task;
                 data += "E | ";
                 data += event.isDone().toString() + " | ";
-                data += event.getDescription() + " | ";
+                data += event.getDescription().trim() + " | ";
                 data += event.getFromDate() + " | ";
                 data += event.getToDate();
                 break;
@@ -81,20 +80,20 @@ public class Parser {
     public static Command parseUserInput(String str) throws IllegalArgumentException {
         if (str.equals("list")) {
             return new ListCommand();
-        } else if (str.matches(markRegex)){
+        } else if (str.matches(MARK_REGEX)){
             String[] temp = str.split(" ");
             int index = Integer.parseInt(temp[1]);
             return new MarkCommand(index);
-        } else if (str.matches(deleteRegex)) {
+        } else if (str.matches(DELETE_REGEX)) {
             String indexStr = str.replaceFirst("delete ", "");
             int index = Integer.parseInt(indexStr);
             return new DeleteCommand(index);
-        } else if (str.matches(toDoRegex)){
+        } else if (str.matches(TODO_REGEX)){
             String desc = str.replaceFirst("todo", "");
             String[] taskInfo = {"T", "false", desc};
             Task toDO = Task.createTask(taskInfo);
             return new ToDoCommand(toDO);
-        } else if (str.matches(eventRegex)) {
+        } else if (str.matches(EVENT_REGEX)) {
             String withoutEvent = str.replaceFirst("event", "");
             String[] fromSplit = withoutEvent.split("/from", 2);
 
@@ -116,7 +115,7 @@ public class Parser {
             String[] taskInfo = {"E", "false", desc, from, to};
             Task event = Task.createTask(taskInfo);
             return new EventCommand(event);
-        } else if (str.matches(deadlineRegex)){
+        } else if (str.matches(DEADLINE_REGEX)){
             String withoutDeadline = str.replaceFirst("deadline", "");
             String[] bySplit = withoutDeadline.split("/by", 2);
 
