@@ -1,6 +1,6 @@
 package Task;
 
-import Parser.DateTimeParser;
+import Parser.DateParser;
 
 import java.time.LocalDate;
 import java.time.temporal.Temporal;
@@ -23,7 +23,7 @@ public class Deadline extends Task {
         String description = taskInfo.get(1);
 
         String deadlineString = taskInfo.get(2);
-        LocalDate deadline = DateTimeParser.parseDate(deadlineString);
+        LocalDate  deadline = DateParser.parseDate(deadlineString);
 
         return new Deadline(isDone, description, deadline);
     }

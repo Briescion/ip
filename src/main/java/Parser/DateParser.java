@@ -1,14 +1,11 @@
 package Parser;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.Temporal;
-import java.util.ArrayList;
 import java.util.List;
 
-public class DateTimeParser {
+public class DateParser {
     // Define input formatters for different date/time patterns
 
     private static final List<DateTimeFormatter> DATE_FORMATTERS = List.of(
