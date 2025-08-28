@@ -31,12 +31,6 @@ public class TaskList {
         }
     }
 
-//    public void list() {
-//        for(int i = 1; i < taskList.size() + 1; i++) {
-//            System.out.println(i + "." + taskList.get(i - 1));
-//        }
-//    }
-
     public Task getTask(int index) {
         return taskList.get(index - 1);
     }

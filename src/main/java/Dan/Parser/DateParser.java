@@ -35,7 +35,9 @@ public class DateParser {
         // Try each formatter until one works
         for (DateTimeFormatter formatter : DATE_FORMATTERS) {
             try {
-                return LocalDate.parse(cleanInput, formatter);
+                LocalDate temp = LocalDate.parse(cleanInput, formatter);
+                String outputDateString = temp.format(OUTPUT_DATE_FORMATTER);
+                return LocalDate.parse(outputDateString, OUTPUT_DATE_FORMATTER);
             } catch (DateTimeParseException e) {
                 // Continue to next formatter
             }
