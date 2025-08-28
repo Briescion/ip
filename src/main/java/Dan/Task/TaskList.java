@@ -2,6 +2,7 @@ package Dan.Task;
 
 import Dan.Storage.Storage;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
     Storage store;
@@ -46,10 +47,11 @@ public class TaskList {
      *
      * @param index the 1-based index of the task to be marked as done
      */
-    public void markDone(int index) {
+    public void mark(int index) {
         try {
-            Task task = taskList.get(index - 1);
-            task.markDone();
+            Task task = taskList.get(index);
+            task.mark();
+            store.writeData(taskList);
         } catch(IndexOutOfBoundsException e) {
             System.out.println("Type in a valid index");
         }
@@ -64,6 +66,13 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return taskList.get(index - 1);
+    }
+
+    public ArrayList<Task> find(String searchStr) {
+        return new ArrayList<>(this.taskList
+                .stream()
+                .filter(task -> task.getDescription().contains(searchStr))
+                .toList());
     }
 
     /**

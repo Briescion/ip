@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public abstract class Task {
     private String description;
-    private Boolean isDone = false;
+    private Boolean isDone;
 
     /**
      * Constructs a new Task with the specified completion status and description.
@@ -69,8 +69,8 @@ public abstract class Task {
     /**
      * Marks the task as completed by setting its status to done.
      */
-    public void markDone() {
-        this.isDone = true;
+    public void mark() {
+        this.isDone = !this.isDone;
     }
 
     /**
