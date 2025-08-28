@@ -17,6 +17,7 @@ public class Parser {
     private static final String TODO_REGEX = "^todo (.+)$";
     private static final String DEADLINE_REGEX = "^deadline (.+) /by (.+)$";
     private static final String EVENT_REGEX = "^event (.+) /from (.+) /to (.+)$";
+    private static final String FIND_REGEX = "^find (.+)$";
 
     private static Task parseDataStringToTask(String dataString) throws IllegalArgumentException  {
         String[] dataStringComponents = dataString.split("\\|");
@@ -80,7 +81,7 @@ public class Parser {
     public static Command parseUserInput(String str) throws IllegalArgumentException {
         if (str.equals("list")) {
             return new ListCommand();
-        } else if (str.matches(MARK_REGEX)){
+        } else if (str.matches(MARK_REGEX)) {
             String[] temp = str.split(" ");
             int index = Integer.parseInt(temp[1]);
             return new MarkCommand(index);
@@ -88,7 +89,7 @@ public class Parser {
             String indexStr = str.replaceFirst("delete ", "");
             int index = Integer.parseInt(indexStr);
             return new DeleteCommand(index);
-        } else if (str.matches(TODO_REGEX)){
+        } else if (str.matches(TODO_REGEX)) {
             String desc = str.replaceFirst("todo", "");
             String[] taskInfo = {"T", "false", desc};
             Task toDO = Task.createTask(taskInfo);
@@ -98,7 +99,7 @@ public class Parser {
             String[] fromSplit = withoutEvent.split("/from", 2);
 
             if (fromSplit.length != 2) {
-               throw new IllegalArgumentException();
+                throw new IllegalArgumentException();
             }
 
             String desc = fromSplit[0];
@@ -115,12 +116,12 @@ public class Parser {
             String[] taskInfo = {"E", "false", desc, from, to};
             Task event = Task.createTask(taskInfo);
             return new EventCommand(event);
-        } else if (str.matches(DEADLINE_REGEX)){
+        } else if (str.matches(DEADLINE_REGEX)) {
             String withoutDeadline = str.replaceFirst("deadline", "");
             String[] bySplit = withoutDeadline.split("/by", 2);
 
             if (bySplit.length != 2) {
-               throw new IllegalArgumentException();
+                throw new IllegalArgumentException();
             }
 
             String desc = bySplit[0];
@@ -129,7 +130,11 @@ public class Parser {
             String[] taskInfo = {"D", "false", desc, by};
             Task deadline = Task.createTask(taskInfo);
             return new DeadlineCommand(deadline);
-        } else if (str.equals("bye")) {
+        } else if (str.matches(FIND_REGEX)) {
+            String searchStr = str.replaceFirst("find", "");
+            String cleanStr = searchStr.trim();
+            return new FindCommand(cleanStr);
+        }else if (str.equals("bye")) {
             return new ExitCommand();
         } else {
             throw new IllegalArgumentException();

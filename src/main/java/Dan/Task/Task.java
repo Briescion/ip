@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public abstract class Task {
     private String description;
-    private Boolean isDone = false;
+    private Boolean isDone;
 
     public Task(String isDone, String description) {
         this.description = description;
@@ -41,19 +41,13 @@ public abstract class Task {
         return this.isDone;
     }
 
-    public void markDone() {
-        this.isDone = true;
-    }
+    public void mark() { this.isDone = !this.isDone; }
 
     public String getDescription() {
         return this.description;
     }
 
     public abstract TaskType getTaskType();
-
-//    public void markUndone() {
-//       this.isDone = false;
-//    }
 
     @Override
     public String toString() {

@@ -16,7 +16,7 @@ public class MarkCommand extends Command {
     }
 
     public boolean execute(TaskList taskList, Ui ui) {
-        taskList.markDone(index);
+        taskList.mark(index);
         Task task = taskList.getTask(index);
         ui.mark(task, taskList.size());
         return true;
