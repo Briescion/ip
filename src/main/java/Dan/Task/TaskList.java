@@ -1,6 +1,6 @@
-package Task;
+package Dan.Task;
 
-import Storage.Storage;
+import Dan.Storage.Storage;
 import java.util.ArrayList;
 
 public class TaskList {

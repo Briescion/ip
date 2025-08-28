@@ -1,8 +1,8 @@
-package Command;
+package Dan.Command;
 
-import Task.TaskList;
+import Dan.Task.TaskList;
 
-import Ui.Ui;
+import Dan.Ui.Ui;
 
 public abstract class Command {
     public abstract CommandType getType();

@@ -1,6 +1,6 @@
-package Task;
+package Dan.Task;
 
-import Parser.DateParser;
+import Dan.Parser.DateParser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package Command;
+package Dan.Command;
 
-import Task.Task;
-import Task.TaskList;
+import Dan.Task.Task;
+import Dan.Task.TaskList;
 
-import Ui.Ui;
+import Dan.Ui.Ui;
 
 public class DeadlineCommand extends Command {
     Task deadline;

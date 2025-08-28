@@ -1,13 +1,15 @@
-import Parser.Parser;
+package Dan;
+
+import Dan.Parser.Parser;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import Storage.Storage;
-import Task.TaskList;
-import Command.Command;
-import Ui.Ui;
+import Dan.Storage.Storage;
+import Dan.Task.TaskList;
+import Dan.Command.Command;
+import Dan.Ui.Ui;
 
 public class Dan {
 

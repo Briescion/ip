@@ -1,9 +1,9 @@
-package Command;
+package Dan.Command;
 
-import Task.TaskList;
-import Task.Task;
+import Dan.Task.TaskList;
+import Dan.Task.Task;
 
-import Ui.Ui;
+import Dan.Ui.Ui;
 
 public class ToDoCommand extends Command {
     Task toDo;

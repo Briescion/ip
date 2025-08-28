@@ -1,10 +1,10 @@
-package Parser;
+package Dan.Parser;
 
-import Command.ListCommand;
-import Task.Task;
+import Dan.Command.*;
+import Dan.Task.Task;
 
-import Task.*;
-import Command.*;
+import Dan.Task.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,9 +1,9 @@
-package Command;
+package Dan.Command;
 
-import Task.Task;
-import Task.TaskList;
+import Dan.Task.Task;
+import Dan.Task.TaskList;
 
-import Ui.Ui;
+import Dan.Ui.Ui;
 
 public class DeleteCommand extends Command {
     int index;

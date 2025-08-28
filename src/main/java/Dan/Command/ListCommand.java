@@ -1,7 +1,7 @@
-package Command;
+package Dan.Command;
 
-import Task.TaskList;
-import Ui.Ui;
+import Dan.Task.TaskList;
+import Dan.Ui.Ui;
 
 public class ListCommand extends Command {
     public CommandType getType() {

@@ -1,7 +1,7 @@
-package Ui;
+package Dan.Ui;
 
-import Task.Task;
-import Task.TaskList;
+import Dan.Task.Task;
+import Dan.Task.TaskList;
 
 public class Ui {
     private final String DIVIDER = "____________________________________________________________ ";

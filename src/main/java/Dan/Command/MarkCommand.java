@@ -1,8 +1,8 @@
-package Command;
+package Dan.Command;
 
-import Task.TaskList;
-import Task.Task;
-import Ui.Ui;
+import Dan.Task.TaskList;
+import Dan.Task.Task;
+import Dan.Ui.Ui;
 
 public class MarkCommand extends Command {
     int index;
