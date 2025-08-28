@@ -7,11 +7,26 @@ public abstract class Task {
     private String description;
     private Boolean isDone = false;
 
+    /**
+     * Constructs a new Task with the specified completion status and description.
+     *
+     * @param isDone a String representation of the task's completion status ("true" or "false")
+     * @param description the description of the task
+     */
     public Task(String isDone, String description) {
         this.description = description;
         this.isDone = Boolean.valueOf(isDone);
     }
 
+    /**
+     * Creates a Task object from the given task information array.
+     * The first element of the array determines the task type:
+     * "T" for ToDo, "D" for Deadline, "E" for Event.
+     *
+     * @param taskInfo an array containing task type and additional task information
+     * @return a Task object of the appropriate subtype
+     * @throws IllegalArgumentException if the task information is invalid or insufficient
+     */
     public static Task createTask(String[] taskInfo) throws IllegalArgumentException {
         if (taskInfo.length < 1) {
             throw new IllegalArgumentException();
@@ -33,28 +48,52 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns a status icon indicating whether the task is completed.
+     *
+     * @return "[X] " if the task is done, "[ ] " if the task is not done
+     */
     public String getStatusIcon() {
         return (isDone ? "[X] " : "[ ]"); // mark done task with X
     }
 
+    /**
+     * Checks if the task is marked as done.
+     *
+     * @return true if the task is completed, false otherwise
+     */
     public Boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * Marks the task as completed by setting its status to done.
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return the task's description
+     */
     public String getDescription() {
         return this.description;
     }
 
-    public abstract TaskType getTaskType();
+    /**
+     * Gets the type of the task.
+     * This method must be implemented by subclasses to return their specific task type.
+     *
+     * @return the TaskType enum value representing this task's type
+     */public abstract TaskType getTaskType();
 
-//    public void markUndone() {
-//       this.isDone = false;
-//    }
-
+    /**
+     * Returns a string representation of the task, including its status icon and description.
+     *
+     * @return a formatted string showing the task's completion status and description
+     */
     @Override
     public String toString() {
         return this.getStatusIcon() + this.description;
