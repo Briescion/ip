@@ -22,32 +22,9 @@ public class Dan {
         this.tasks = new TaskList(storage.load());
     }
 
-    public void run() {
-
-
-        Scanner scanner = new Scanner(System.in);
-        Boolean shouldContinue = true;
-        String input = "";
-
-        while (shouldContinue) {
-            input = scanner.nextLine();
-
-            try {
-                Command cmd = Parser.parseUserInput(input);
-//                shouldContinue = cmd.execute(this.tasks, ui);
-            } catch (IllegalArgumentException e) {
-                continue;
-            }
-        }
-    }
-
-//    public static void main(String[] args) {
-//        new Dan("data/tasks.txt").run();
-//    }
     public String getReponse(String input) {
         try {
             Command cmd = Parser.parseUserInput(input);
-//            shouldContinue = cmd.execute(this.tasks, ui);
             return cmd.execute(this.tasks);
         } catch (IllegalArgumentException e) {
             return "Invalid input";
