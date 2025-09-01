@@ -3,8 +3,6 @@ package Dan.Command;
 import Dan.Task.TaskList;
 import Dan.Task.Task;
 
-import Dan.Ui.Ui;
-
 public class EventCommand extends Command {
     Task event;
 
@@ -16,9 +14,8 @@ public class EventCommand extends Command {
         return  CommandType.EVENT;
     }
 
-    public boolean execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList) {
         taskList.add(event);
-        ui.makeTask(event, taskList.size());
-        return true;
+        return "Got it. I've added this task: \n " + event + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 }

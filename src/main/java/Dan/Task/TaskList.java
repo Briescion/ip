@@ -49,7 +49,7 @@ public class TaskList {
      */
     public void mark(int index) {
         try {
-            Task task = taskList.get(index);
+            Task task = taskList.get(index - 1);
             task.mark();
             store.writeData(taskList);
         } catch(IndexOutOfBoundsException e) {

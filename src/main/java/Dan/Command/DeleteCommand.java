@@ -3,8 +3,6 @@ package Dan.Command;
 import Dan.Task.Task;
 import Dan.Task.TaskList;
 
-import Dan.Ui.Ui;
-
 public class DeleteCommand extends Command {
     int index;
 
@@ -16,10 +14,9 @@ public class DeleteCommand extends Command {
         return  CommandType.DELETE;
     }
 
-    public boolean execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList) {
         Task task = taskList.getTask(index);
         taskList.delete(index);
-        ui.deleteTask(task, taskList.size());
-        return true;
+        return "Noted. I've removed this task: \n " + task + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 }

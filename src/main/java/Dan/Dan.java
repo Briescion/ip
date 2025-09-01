@@ -9,25 +9,21 @@ import java.util.Scanner;
 import Dan.Storage.Storage;
 import Dan.Task.TaskList;
 import Dan.Command.Command;
-import Dan.Ui.Ui;
 
 public class Dan {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     public Dan(String filePath) {
         Path path = Paths.get( filePath);
         Storage storage = new Storage(path);
         this.storage = storage;
         this.tasks = new TaskList(storage.load());
-        this.ui = new Ui();
     }
 
     public void run() {
 
-        this.ui.welcome();
 
         Scanner scanner = new Scanner(System.in);
         Boolean shouldContinue = true;
@@ -38,15 +34,24 @@ public class Dan {
 
             try {
                 Command cmd = Parser.parseUserInput(input);
-                shouldContinue = cmd.execute(this.tasks, ui);
+//                shouldContinue = cmd.execute(this.tasks, ui);
             } catch (IllegalArgumentException e) {
                 continue;
             }
         }
     }
 
-    public static void main(String[] args) {
-        new Dan("data/tasks.txt").run();
+//    public static void main(String[] args) {
+//        new Dan("data/tasks.txt").run();
+//    }
+    public String getReponse(String input) {
+        try {
+            Command cmd = Parser.parseUserInput(input);
+//            shouldContinue = cmd.execute(this.tasks, ui);
+            return cmd.execute(this.tasks);
+        } catch (IllegalArgumentException e) {
+            return "Invalid input";
+        }
     }
 
     public static void unrecognisedInput() throws IllegalArgumentException {

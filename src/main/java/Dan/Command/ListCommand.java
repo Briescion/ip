@@ -1,15 +1,17 @@
 package Dan.Command;
 
 import Dan.Task.TaskList;
-import Dan.Ui.Ui;
 
 public class ListCommand extends Command {
     public CommandType getType() {
         return  CommandType.LIST;
     }
 
-    public boolean execute(TaskList taskList, Ui ui) {
-        ui.list(taskList);
-        return true;
+    public String execute(TaskList taskList) {
+        String response = "";
+        for(int i = 1; i < taskList.size() + 1; i++) {
+            response += i + "." + taskList.getTask(i) + "\n";
+        }
+        return response;
     }
 }

@@ -3,8 +3,6 @@ package Dan.Command;
 import Dan.Task.Task;
 import Dan.Task.TaskList;
 
-import Dan.Ui.Ui;
-
 public class DeadlineCommand extends Command {
     Task deadline;
 
@@ -16,9 +14,8 @@ public class DeadlineCommand extends Command {
         return  CommandType.DEADLINE;
     }
 
-    public boolean execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList) {
         taskList.add(deadline);
-        ui.makeTask(deadline, taskList.size());
-        return true;
+        return "Got it. I've added this task: \n " + deadline + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 }

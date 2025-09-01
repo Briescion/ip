@@ -1,7 +1,6 @@
 package Dan.Command;
 
 import Dan.Task.TaskList;
-import Dan.Ui.Ui;
 
 public class ExitCommand extends Command {
 
@@ -10,8 +9,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui) {
-        ui.exit();
-        return false;
+    public String execute(TaskList taskList) {
+        return "Bye. Hope to see you again soon!\n";
     }
 }
