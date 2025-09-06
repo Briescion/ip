@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class Task {
-    private String description;
+    private final String description;
     private Boolean isDone;
 
     /**

@@ -1,4 +1,4 @@
-package Dan.Ui;
+package Dan.Gui;
 
 import java.io.IOException;
 import java.util.Collections;

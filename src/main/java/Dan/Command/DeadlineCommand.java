@@ -15,9 +15,9 @@ public class DeadlineCommand extends Command {
         return  CommandType.DEADLINE;
     }
 
-    public String execute(TaskList taskList) {
+    public String execute(TaskList tasks) {
         assert deadline.getTaskType() == TaskType.DEADLINE;
-        taskList.add(deadline);
-        return "Got it. I've added this task: \n " + deadline + "\nNow you have " + taskList.size() + " tasks in the list.";
+        tasks.add(deadline);
+        return "Got it. I've added this task: \n " + deadline + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

@@ -12,13 +12,11 @@ import Dan.Command.Command;
 
 public class Dan {
 
-    private Storage storage;
-    private TaskList tasks;
+    private final TaskList tasks;
 
     public Dan(String filePath) {
         Path path = Paths.get( filePath);
         Storage storage = new Storage(path);
-        this.storage = storage;
         this.tasks = new TaskList(storage.load());
     }
 

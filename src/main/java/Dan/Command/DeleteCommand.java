@@ -14,10 +14,10 @@ public class DeleteCommand extends Command {
         return  CommandType.DELETE;
     }
 
-    public String execute(TaskList taskList) {
+    public String execute(TaskList tasks) {
         assert index > 0;
-        Task task = taskList.getTask(index);
-        taskList.delete(index);
-        return "Noted. I've removed this task: \n " + task + "\nNow you have " + taskList.size() + " tasks in the list.";
+        Task task = tasks.getTask(index);
+        tasks.delete(index);
+        return "Noted. I've removed this task: \n " + task + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

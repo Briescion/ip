@@ -7,7 +7,7 @@ import java.time.temporal.Temporal;
 import java.util.ArrayList;
 
 public class Deadline extends Task {
-    private LocalDate deadlineDate;
+    private final LocalDate deadlineDate;
 
     /**
      * Constructs a new Deadline task with the specified completion status, description, and deadline date.

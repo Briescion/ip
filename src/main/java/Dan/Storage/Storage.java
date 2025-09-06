@@ -75,7 +75,7 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(filePath);
             ArrayList<String> linesArr = new ArrayList<>(lines);
-            tasks = Parser.parseDataStringListToTasks(linesArr);
+            tasks = Parser.parseDataStringsToTasks(linesArr);
             return tasks;
         } catch (IOException e) {
             return tasks;

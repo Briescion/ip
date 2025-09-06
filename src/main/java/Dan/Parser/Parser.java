@@ -33,7 +33,7 @@ public class Parser {
      * @param stringDataList a list of strings representing tasks in storage format
      * @return an ArrayList of Task objects parsed from the input strings
      */
-    public static ArrayList<Task> parseDataStringListToTasks(List<String> stringDataList) {
+    public static ArrayList<Task> parseDataStringsToTasks(List<String> stringDataList) {
         ArrayList<Task> tasks = new ArrayList<>();
 
         for(int i = 0; i < stringDataList.size(); i++) {
@@ -56,27 +56,27 @@ public class Parser {
         String data = "";
 
         switch (task.getTaskType()) {
-            case TODO:
-                ToDo todo = (ToDo) task;
-                data += "T | ";
-                data += todo.isDone().toString() + " | ";
-                data += todo.getDescription().trim();
-                break;
-            case DEADLINE:
-                Deadline deadline = (Deadline) task;
-                data += "D | ";
-                data += deadline.isDone().toString() + " | ";
-                data += deadline.getDescription().trim() + " | ";
-                data += deadline.getDeadlineDate();
-                break;
-            case EVENT:
-                Event event = (Event) task;
-                data += "E | ";
-                data += event.isDone().toString() + " | ";
-                data += event.getDescription().trim() + " | ";
-                data += event.getFromDate() + " | ";
-                data += event.getToDate();
-                break;
+        case TODO:
+            ToDo todo = (ToDo) task;
+            data += "T | ";
+            data += todo.isDone().toString() + " | ";
+            data += todo.getDescription().trim();
+            break;
+        case DEADLINE:
+            Deadline deadline = (Deadline) task;
+            data += "D | ";
+            data += deadline.isDone().toString() + " | ";
+            data += deadline.getDescription().trim() + " | ";
+            data += deadline.getDeadlineDate();
+            break;
+        case EVENT:
+            Event event = (Event) task;
+            data += "E | ";
+            data += event.isDone().toString() + " | ";
+            data += event.getDescription().trim() + " | ";
+            data += event.getFromDate() + " | ";
+            data += event.getToDate();
+            break;
         }
 
         return data;
