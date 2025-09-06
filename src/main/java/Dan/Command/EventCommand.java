@@ -2,6 +2,7 @@ package Dan.Command;
 
 import Dan.Task.TaskList;
 import Dan.Task.Task;
+import Dan.Task.TaskType;
 
 public class EventCommand extends Command {
     Task event;
@@ -15,6 +16,7 @@ public class EventCommand extends Command {
     }
 
     public String execute(TaskList taskList) {
+        assert event.getTaskType() == TaskType.EVENT;
         taskList.add(event);
         return "Got it. I've added this task: \n " + event + "\nNow you have " + taskList.size() + " tasks in the list.";
     }

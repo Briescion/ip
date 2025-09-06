@@ -15,6 +15,7 @@ public class MarkCommand extends Command {
     }
 
     public String execute(TaskList taskList) {
+        assert index > 0;
         taskList.mark(index);
         Task task = taskList.getTask(index);
 
