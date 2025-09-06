@@ -24,6 +24,7 @@ public class FindCommand extends Command {
         for(int i = 0; i < searchResults.size(); i++) {
             response += i + 1 + "." + searchResults.get(i) + "\n";
         }
+
         return  response;
     }
 }

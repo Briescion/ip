@@ -33,6 +33,7 @@ public class DateParser {
         String cleanInput = dateStr.trim();
 
         // Try each formatter until one works
+        assert  !DATE_FORMATTERS.isEmpty();
         for (DateTimeFormatter formatter : DATE_FORMATTERS) {
             try {
                 LocalDate temp = LocalDate.parse(cleanInput, formatter);
