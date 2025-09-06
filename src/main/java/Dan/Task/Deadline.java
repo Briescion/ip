@@ -52,6 +52,10 @@ public class Deadline extends Task {
         return this.deadlineDate;
     }
 
+    public LocalDate getReminderDate() {
+        return this.deadlineDate;
+    }
+
     /**
      * Gets the type of this task.
      *

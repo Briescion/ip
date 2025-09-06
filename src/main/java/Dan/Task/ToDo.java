@@ -1,5 +1,6 @@
 package Dan.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ToDo extends Task {
@@ -20,6 +21,11 @@ public class ToDo extends Task {
         String description = taskInfo.get(1);
 
         return new ToDo(description, isDone);
+    }
+
+    @Override
+    public LocalDate getReminderDate() {
+        return null;
     }
 
     @Override

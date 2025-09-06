@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Event extends Task {
-    LocalDate fromDate;
-    LocalDate toDate;
+    LocalDate startDate;
+    LocalDate endDate;
 
     /**
      * Constructs a new Event task with the specified completion status, description, and date range.
@@ -19,8 +19,8 @@ public class Event extends Task {
      */
     public Event(String isDone, String description, LocalDate from, LocalDate to) {
         super(isDone, description);
-        this.fromDate = from;
-        this.toDate = to;
+        this.startDate = from;
+        this.endDate = to;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Event extends Task {
      * @return the LocalDate representing when this event begins
      */
     public LocalDate getFromDate() {
-        return this.fromDate;
+        return this.startDate;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Event extends Task {
      * @return the LocalDate representing when this event ends
      */
     public LocalDate getToDate() {
-        return this.toDate;
+        return this.endDate;
     }
 
     /**
@@ -72,6 +72,10 @@ public class Event extends Task {
         return TaskType.EVENT;
     }
 
+    public LocalDate getReminderDate() {
+        return this.endDate;
+    }
+
     /**
      * Returns a string representation of the event task, including its type marker,
      * completion status, description, and date range.
@@ -80,7 +84,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from:" + this.fromDate + " to:" + this.toDate + ")";
+        return "[E]" + super.toString() + "(from:" + this.startDate + " to:" + this.endDate + ")";
     }
 }
 

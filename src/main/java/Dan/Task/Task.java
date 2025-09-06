@@ -1,5 +1,6 @@
 package Dan.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -88,6 +89,8 @@ public abstract class Task {
      *
      * @return the TaskType enum value representing this task's type
      */public abstract TaskType getTaskType();
+
+     public abstract LocalDate getReminderDate();
 
     /**
      * Returns a string representation of the task, including its status icon and description.

@@ -18,6 +18,7 @@ public class Parser {
     private static final String DEADLINE_REGEX = "^deadline (.+) /by (.+)$";
     private static final String EVENT_REGEX = "^event (.+) /from (.+) /to (.+)$";
     private static final String FIND_REGEX = "^find (.+)$";
+    private static final String REMIND_REGEX = "^remind /within (-?\\d+)$";
 
 
     private static Task parseDataStringToTask(String dataString) throws IllegalArgumentException  {
@@ -166,7 +167,16 @@ public class Parser {
             String searchStr = str.replaceFirst("find", "");
             String cleanStr = searchStr.trim();
             return new FindCommand(cleanStr);
-        }else if (str.equals("bye")) {
+        } else if (str.matches(REMIND_REGEX)) {
+            String daysFromNowStr = str
+                    .replaceFirst("remind", "")
+                    .replaceFirst("/within", "")
+                    .trim();
+
+            int daysFromNow = Integer.valueOf(daysFromNowStr);
+
+            return new RemindCommand(daysFromNow);
+        } else if (str.equals("bye")) {
             return new ExitCommand();
         } else {
             throw new IllegalArgumentException();

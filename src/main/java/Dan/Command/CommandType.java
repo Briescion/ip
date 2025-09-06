@@ -8,5 +8,6 @@ public enum CommandType {
     EVENT,
     DEADLINE,
     FIND,
+    REMINDER,
     EXIT
 }

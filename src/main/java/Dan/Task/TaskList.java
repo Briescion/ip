@@ -3,10 +3,11 @@ package Dan.Task;
 import Dan.Storage.Storage;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.LocalDate;
 
 public class TaskList {
     Storage store;
-    ArrayList<Task> taskList = new ArrayList<>();
+    ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Constructs a new TaskList with the specified storage.
@@ -16,7 +17,7 @@ public class TaskList {
      */
     public TaskList(Storage store) {
         this.store = store;
-        this.taskList = store.getTaskList();
+        this.tasks = store.getTaskList();
     }
 
     /**
@@ -25,8 +26,8 @@ public class TaskList {
      * @param task the Task object to be added to the list
      */
     public void add(Task task) {
-        taskList.add(task);
-        store.writeData(taskList);
+        tasks.add(task);
+        store.writeData(tasks);
     }
 
     /**
@@ -36,8 +37,8 @@ public class TaskList {
      * @param index the 1-based index of the task to be deleted
      */
     public void delete(int index) {
-        taskList.remove(index - 1);
-        store.writeData(taskList);
+        tasks.remove(index - 1);
+        store.writeData(tasks);
     }
 
     /**
@@ -49,9 +50,9 @@ public class TaskList {
      */
     public void mark(int index) {
         try {
-            Task task = taskList.get(index - 1);
+            Task task = tasks.get(index - 1);
             task.mark();
-            store.writeData(taskList);
+            store.writeData(tasks);
         } catch(IndexOutOfBoundsException e) {
             System.out.println("Type in a valid index");
         }
@@ -65,22 +66,32 @@ public class TaskList {
      * @return the Task object at the specified index
      */
     public Task getTask(int index) {
-        return taskList.get(index - 1);
+        return tasks.get(index - 1);
     }
 
     public ArrayList<Task> find(String searchStr) {
-        return new ArrayList<>(this.taskList
+        return new ArrayList<>(this.tasks
                 .stream()
                 .filter(task -> task.getDescription().contains(searchStr))
                 .toList());
     }
 
+    public ArrayList<Task> getTasksToRemind(int daysFromNow) {
+        LocalDate today = LocalDate.now();
+        LocalDate cutOffDate = today.plusDays(daysFromNow);
+        Task[] tasksToRemind = tasks.stream()
+                .filter(task -> task.getTaskType() != TaskType.TODO)
+                .filter(task -> !task.getReminderDate().isAfter(cutOffDate))
+                .filter(task -> !task.getReminderDate().isBefore(today))
+                .toArray(Task[]::new);
+        return new ArrayList<>(Arrays.asList(tasksToRemind));
+    }
     /**
      * Returns the number of tasks in the task list.
      *
      * @return the size of the task list
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 }
