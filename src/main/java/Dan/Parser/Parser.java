@@ -115,6 +115,7 @@ public class Parser {
         } else if (str.matches(MARK_REGEX)) {
             String[] temp = str.split(" ");
             int index = Integer.parseInt(temp[1]);
+            assert index > 0;
             return new MarkCommand(index);
         } else if (str.matches(DELETE_REGEX)) {
             String indexStr = str.replaceFirst("delete ", "");
