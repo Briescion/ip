@@ -6,8 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class DateParser {
-    // Define input formatters for different date/time patterns
 
+    // Define input formatters for different date/time patterns
     private static final List<DateTimeFormatter> DATE_FORMATTERS = List.of(
             DateTimeFormatter.ofPattern("d/M/yyyy"),          // 2/12/2019
             DateTimeFormatter.ofPattern("dd/MM/yyyy"),        // 02/12/2019

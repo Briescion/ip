@@ -14,8 +14,8 @@ public class DeadlineCommand extends Command {
         return  CommandType.DEADLINE;
     }
 
-    public String execute(TaskList taskList) {
-        taskList.add(deadline);
-        return "Got it. I've added this task: \n " + deadline + "\nNow you have " + taskList.size() + " tasks in the list.";
+    public String execute(TaskList tasks) {
+        tasks.add(deadline);
+        return "Got it. I've added this task: \n " + deadline + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

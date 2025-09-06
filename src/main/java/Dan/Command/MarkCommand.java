@@ -14,14 +14,14 @@ public class MarkCommand extends Command {
         return CommandType.MARK;
     }
 
-    public String execute(TaskList taskList) {
-        taskList.mark(index);
-        Task task = taskList.getTask(index);
+    public String execute(TaskList tasks) {
+        tasks.mark(index);
+        Task task = tasks.getTask(index);
 
         if (task.isDone()) {
-            return "Got it. I've marked this task as done: \n " + task + "\n";
+            return "Got it. I've marked this task as done: \n " + tasks + "\n";
         } else {
-            return "Got it. I've marked this task as undone: \n " + task + "\n";
+            return "Got it. I've marked this task as undone: \n " + tasks + "\n";
         }
     }
 }

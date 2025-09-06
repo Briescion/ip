@@ -5,5 +5,5 @@ import Dan.Task.TaskList;
 public abstract class Command {
     public abstract CommandType getType();
 
-    public abstract String execute(TaskList taskList);
+    public abstract String execute(TaskList tasks);
 }

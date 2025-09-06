@@ -14,8 +14,8 @@ public class EventCommand extends Command {
         return  CommandType.EVENT;
     }
 
-    public String execute(TaskList taskList) {
-        taskList.add(event);
-        return "Got it. I've added this task: \n " + event + "\nNow you have " + taskList.size() + " tasks in the list.";
+    public String execute(TaskList tasks) {
+        tasks.add(event);
+        return "Got it. I've added this task: \n " + event + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

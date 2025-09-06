@@ -14,8 +14,8 @@ public class ToDoCommand extends Command {
         return CommandType.TODO;
     }
 
-    public String execute(TaskList taskList) {
-        taskList.add(toDo);
-        return "Got it. I've added this task: \n " + toDo + "\nNow you have " + taskList.size() + " tasks in the list.";
+    public String execute(TaskList tasks) {
+        tasks.add(toDo);
+        return "Got it. I've added this task: \n " + toDo + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

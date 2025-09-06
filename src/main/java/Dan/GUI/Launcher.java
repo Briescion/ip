@@ -1,4 +1,4 @@
-package Dan.Ui;
+package Dan.GUI;
 
 import javafx.application.Application;
 

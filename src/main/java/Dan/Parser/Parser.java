@@ -56,27 +56,27 @@ public class Parser {
         String data = "";
 
         switch (task.getTaskType()) {
-            case TODO:
-                ToDo todo = (ToDo) task;
-                data += "T | ";
-                data += todo.isDone().toString() + " | ";
-                data += todo.getDescription().trim();
-                break;
-            case DEADLINE:
-                Deadline deadline = (Deadline) task;
-                data += "D | ";
-                data += deadline.isDone().toString() + " | ";
-                data += deadline.getDescription().trim() + " | ";
-                data += deadline.getDeadlineDate();
-                break;
-            case EVENT:
-                Event event = (Event) task;
-                data += "E | ";
-                data += event.isDone().toString() + " | ";
-                data += event.getDescription().trim() + " | ";
-                data += event.getFromDate() + " | ";
-                data += event.getToDate();
-                break;
+        case TODO:
+            ToDo todo = (ToDo) task;
+            data += "T | ";
+            data += todo.isDone().toString() + " | ";
+            data += todo.getDescription().trim();
+            break;
+        case DEADLINE:
+            Deadline deadline = (Deadline) task;
+            data += "D | ";
+            data += deadline.isDone().toString() + " | ";
+            data += deadline.getDescription().trim() + " | ";
+            data += deadline.getDeadlineDate();
+            break;
+        case EVENT:
+            Event event = (Event) task;
+            data += "E | ";
+            data += event.isDone().toString() + " | ";
+            data += event.getDescription().trim() + " | ";
+            data += event.getFromDate() + " | ";
+            data += event.getToDate();
+            break;
         }
 
         return data;
