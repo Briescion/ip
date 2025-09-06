@@ -1,4 +1,4 @@
-package Dan.GUI;
+package Dan.Gui;
 
 import java.io.IOException;
 

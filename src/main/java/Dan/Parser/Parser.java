@@ -33,7 +33,7 @@ public class Parser {
      * @param stringDataList a list of strings representing tasks in storage format
      * @return an ArrayList of Task objects parsed from the input strings
      */
-    public static ArrayList<Task> parseDataStringListToTasks(List<String> stringDataList) {
+    public static ArrayList<Task> parseDataStringsToTasks(List<String> stringDataList) {
         ArrayList<Task> tasks = new ArrayList<>();
 
         for(int i = 0; i < stringDataList.size(); i++) {
